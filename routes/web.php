@@ -11,9 +11,11 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+// $router->get('/', function () use ($router) {
+//     return $router->app->version();
+// });
+
+$router->group(['middleware' => 'client.credentials'], function() use ($router) {
 
     $router->get('/users1', 'User1Controller@index'); // get all users records
     $router->post('/users1', 'User1Controller@add'); // create new user record
@@ -28,3 +30,5 @@ $router->get('/', function () use ($router) {
     $router->put('/users2/{id}', 'User2Controller@update'); // update user record
     $router->patch('/users2/{id}', 'User2Controller@update'); // update user record
     $router->delete('/users2/{id}', 'User2Controller@delete'); // delete record
+
+});
